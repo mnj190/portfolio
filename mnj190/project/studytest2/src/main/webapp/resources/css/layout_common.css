@@ -1,0 +1,12 @@
+@charset "EUC-KR";
+
+a:link, a:visited {
+	text-decoration: none;
+}
+
+main {
+	width: 1000px;
+	margin: auto;
+	display: flex;
+	justify-content: space-between;
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.ShopDAO-mapper">
+	<select id="getCategory"
+		resultType="com.my.test.shop.vo.CategoryVO">
+		select * from category where
+		parent_num is null
+	</select>
+
+	<select id="getSubCategory"
+		resultType="com.my.test.shop.vo.CategoryVO">
+		select * from category where parent_num is not null
+	</select>
+
+	<select id="seachSubCategory" parameterType="String"
+		resultType="com.my.test.shop.vo.CategoryVO">
+		select * from category where parent_num = #{cate_num}
+	</select>
+
+	<insert id="registration"
+		parameterType="com.my.test.shop.vo.ProductVO">
+		insert into (prod_num, prod_dep1, prod_dep2,
+		prod_name,
+		prod_price,
+		prod_quantity, prod_description, prod_option)
+		values
+		(prod_num_SEQ.nextval, #{prod_dep1}, #{prod_dep2}, #{prod_name},
+		#{prod_price}, #{prod_quantity},, #{prod_description}, #{prod_option})
+		<selectKey resultType="int" keyProperty="prod_num"
+			order="AFTER">
+			SELECT prod_num_SEQ.CURRVAL FROM DUAL;
+		</selectKey>
+	</insert>
+
+
+</mapper>

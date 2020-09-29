@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class ProductVO {
 	private String prod_num;
+	private String ucode;
 	private String prod_dep1;
 	private String prod_dep2;
 	private String prod_name;

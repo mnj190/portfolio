@@ -24,19 +24,19 @@ public class MemberDAOImplTest {
 	MemberDAO memberDAO;
 
 	@Test
-	@DisplayName("È¸¿ø°¡ÀÔ")
+	@DisplayName("íšŒì›ê°€ì…")
 	@Disabled
 	void signup() {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setEmail("mnj190@naver.com");
 		memberVO.setId("mnj190");
 		memberVO.setPw("1234");
-		memberVO.setName("Á¶Á¤¹Î");
+		memberVO.setName("ì¡°ì •ë¯¼");
 		memberDAO.signup(memberVO);
 	}
 	
 	@Test
-	@DisplayName("¾ÆÀÌµğ Ã¼Å©")
+	@DisplayName("ì•„ì´ë”” ì²´í¬")
 	void id_check() {
 		String id = "mnj1922";
 		logger.info(memberDAO.id_check(id).toString());

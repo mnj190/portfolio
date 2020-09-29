@@ -16,14 +16,14 @@ public class MemberSVCImpl implements MemberSVC {
 	@Inject
 	MemberDAO memberDAO;
 
-//	È¸¿ø°¡ÀÔ
+//	íšŒì›ê°€ì…
 	@Override
 	public int signup(MemberVO memberVO) {
 
 		return memberDAO.signup(memberVO);
 	}
 
-//	·Î±×ÀÎ
+//	ë¡œê·¸ì¸
 	@Override
 	public MemberVO login(String id, String pw) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -33,7 +33,7 @@ public class MemberSVCImpl implements MemberSVC {
 		return memberDAO.login(map);
 	}
 
-//	¾ÆÀÌµğ Ã¼Å©
+//	ì•„ì´ë”” ì²´í¬
 	@Override
 	public MemberVO id_check(String id) {
 		// TODO Auto-generated method stub

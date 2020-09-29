@@ -12,13 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.test.shop.svc.ShopSVC;
 import com.my.test.shop.vo.CategoryVO;
-import com.my.test.shop.vo.ProductVO;
 
 @Controller
 @RequestMapping(value = "/shop")
@@ -37,10 +34,8 @@ public class ShopController {
 		map.put("subcategory", shopSVC.getSubCategory());
 
 		res = new ResponseEntity<Map<String, List<CategoryVO>>>(map, HttpStatus.OK); // 200
-		logger.info("카테 호출");
-
+	
 		return res;
 	}
 
-	
 }

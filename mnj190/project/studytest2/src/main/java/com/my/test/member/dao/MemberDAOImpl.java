@@ -15,21 +15,21 @@ public class MemberDAOImpl implements MemberDAO {
 	@Inject
 	SqlSession sqlsession;
 
-//	È¸¿ø°¡ÀÔ
+//	íšŒì›ê°€ì…
 	@Override
 	public int signup(MemberVO memberVO) {
 		// TODO Auto-generated method stub
 		return sqlsession.insert("mappers.MemberDAO-mapper.signup", memberVO);
 	}
 
-//	·Î±×ÀÎ
+//	ë¡œê·¸ì¸ ë° íšŒì› ê²€ìƒ‰	
 	@Override
 	public MemberVO login(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectOne("mappers.MemberDAO-mapper.login", map);
 	}
 
-//	¾ÆÀÌµğ Ã¼Å©
+//	ì•„ì´ë”” ì²´í¬
 	@Override
 	public MemberVO id_check(String id) {
 		// TODO Auto-generated method stub

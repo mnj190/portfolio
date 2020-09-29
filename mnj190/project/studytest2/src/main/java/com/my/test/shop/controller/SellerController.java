@@ -1,12 +1,9 @@
 package com.my.test.shop.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.my.test.member.vo.MemberVO;
 import com.my.test.shop.svc.ShopSVC;
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
@@ -56,13 +52,22 @@ public class SellerController {
 
 	@ResponseBody
 	@RequestMapping(value = "/registration", produces = "application/json")
-	public String modification(@RequestBody ProductVO param) throws Exception {
-
+	public String modification(HttpSession session, @RequestBody ProductVO param) throws Exception {
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		param.setUcode(member.getUcode());
 		shopSVC.registration(param);
 
-		List<OptionVO> option = param.getOptionVO();
+		logger.info(param.getProd_option());
 
-		logger.info(option.toString());
+		if (!param.getProd_option().equals("f")) {
+			logger.info("옵션 입력");
+			List<OptionVO> options = param.getOptionVO();
+			for (OptionVO option : options) {
+				option.setProd_num(param.getProd_num());
+				shopSVC.setOption(option);
+			}
+		}
+
 		logger.info(param.getProd_num());
 
 		return null;

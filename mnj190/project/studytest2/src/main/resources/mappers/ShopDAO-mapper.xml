@@ -19,17 +19,28 @@
 
 	<insert id="registration"
 		parameterType="com.my.test.shop.vo.ProductVO">
-		insert into (prod_num, prod_dep1, prod_dep2,
+		insert into product(prod_num, ucode, prod_dep1, prod_dep2,
 		prod_name,
 		prod_price,
 		prod_quantity, prod_description, prod_option)
 		values
-		(prod_num_SEQ.nextval, #{prod_dep1}, #{prod_dep2}, #{prod_name},
-		#{prod_price}, #{prod_quantity},, #{prod_description}, #{prod_option})
-		<selectKey resultType="int" keyProperty="prod_num"
+		(prod_num_SEQ.nextval,#{ucode}, #{prod_dep1}, #{prod_dep2},
+		#{prod_name},
+		#{prod_price}, #{prod_quantity}, #{prod_description},
+		#{prod_option})
+		<selectKey resultType="String" keyProperty="prod_num"
 			order="AFTER">
-			SELECT prod_num_SEQ.CURRVAL FROM DUAL;
+			SELECT prod_num_SEQ.CURRVAL FROM DUAL
 		</selectKey>
+	</insert>
+
+	<insert id="setOption"
+		parameterType="com.my.test.shop.vo.OptionVO">
+		insert into options (op_num, prod_num, op_dep1_name,
+		op_dep2_name, op_dep1_value, op_dep2_value, op_add_price, op_state,
+		op_quantity) values(op_num_SEQ.nextval, #{prod_num}, #{op_dep1_name},
+		#{op_dep2_name}, #{op_dep1_value}, #{op_dep2_value}, #{op_add_price},
+		#{op_state}, #{op_quantity})
 	</insert>
 
 

@@ -5,13 +5,13 @@ import java.util.Map;
 import com.my.test.member.vo.MemberVO;
 
 public interface MemberDAO {
-//	È¸¿ø°¡ÀÔ
+//	íšŒì›ê°€ì…
 	public int signup(MemberVO memberVO);
 	
-//	·Î±×ÀÎ ¹× È¸¿ø °Ë»ö	
+//	ë¡œê·¸ì¸ ë° íšŒì› ê²€ìƒ‰
 	public MemberVO login(Map<String, String> map);
 	
-//	¾ÆÀÌµğ Ã¼Å©
+//	ì•„ì´ë”” ì²´í¬
 	public MemberVO id_check(String id);
 	
 }

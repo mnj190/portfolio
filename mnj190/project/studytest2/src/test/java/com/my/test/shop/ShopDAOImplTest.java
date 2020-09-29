@@ -23,7 +23,7 @@ public class ShopDAOImplTest {
 	ShopDAO shopDAO;
 
 	@Test
-	@DisplayName("Ä«Å×°í¸® °¡Á®¿À±â")
+	@DisplayName("ì¹´í…Œê³ ë¦¬ ê°€ì ¸ì˜¤ê¸°")
 	@Disabled
 	void signup() {
 		logger.info(shopDAO.getCategory().toString());
@@ -31,7 +31,7 @@ public class ShopDAOImplTest {
 	}
 
 	@Test
-	@DisplayName("¼­ºê Ä«Å×°í¸® ¼­Ä¡")
+	@DisplayName("ì„œë¸Œ ì¹´í…Œê³ ë¦¬ ì„œì¹˜")
 //	@Disabled
 	void seachSubCategory() {
 		String cate_num = "2";

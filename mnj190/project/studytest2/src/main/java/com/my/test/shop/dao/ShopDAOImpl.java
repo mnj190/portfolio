@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.my.test.shop.vo.CategoryVO;
+import com.my.test.shop.vo.OptionVO;
 import com.my.test.shop.vo.ProductVO;
 
 @Repository
@@ -16,32 +17,37 @@ public class ShopDAOImpl implements ShopDAO {
 	@Inject
 	SqlSession sqlsession;
 
-//	Ä«Å×°í¸® °¡Á®¿À±â
+//	ì¹´í…Œê³ ë¦¬ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public List<CategoryVO> getCategory() {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mappers.ShopDAO-mapper.getCategory");
 	}
 
-//	¼­ºê Ä«Å×°í¸® °¡Á®¿À±â
+//	ì„œë¸Œ	ì¹´í…Œê³ ë¦¬ ê°€ì ¸ì˜¤ê¸°
 	@Override
 	public List<CategoryVO> getSubCategory() {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mappers.ShopDAO-mapper.getSubCategory");
 	}
 
-//	¼­ºê Ä«Å×°í¸® ¼­Ä¡
+//	ì„œí¬ ì¹´í…Œê³ ë¦¬ ì„œì¹˜
 	@Override
 	public List<CategoryVO> seachSubCategory(String cate_num) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mappers.ShopDAO-mapper.seachSubCategory", cate_num);
 	}
 
-//	»óÇ° ÀúÀå
+//	ìƒí’ˆ ì €ì¥
 	@Override
 	public int registration(ProductVO product) {
 		// TODO Auto-generated method stub
 		return sqlsession.insert("mappers.ShopDAO-mapper.registration", product);
 	}
 
+//	ì˜µì…˜ ì €ì¥
+	public int setOption(OptionVO option) {
+		// TODO Auto-generated method stub
+		return sqlsession.insert("mappers.ShopDAO-mapper.setOption", option);
+	}
 }

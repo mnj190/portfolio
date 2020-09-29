@@ -3,18 +3,23 @@ package com.my.test.shop.dao;
 import java.util.List;
 
 import com.my.test.shop.vo.CategoryVO;
+import com.my.test.shop.vo.OptionVO;
 import com.my.test.shop.vo.ProductVO;
 
 public interface ShopDAO {
-//	Ä«Å×°í¸® °¡Á®¿À±â
+//	ì¹´í…Œê³ ë¦¬ ê°€ì ¸ì˜¤ê¸°
 	public List<CategoryVO> getCategory();
 
-//	¼­ºê Ä«Å×°í¸® °¡Á®¿À±â
+//	ì„œë¸Œ ì¹´í…Œê³ ë¦¬ ê°€ì ¸ì˜¤ê¸°
 	public List<CategoryVO> getSubCategory();
 
-// 	¼­Å© Ä«Å×°í¸® ¼­Ä¡
+// 	ì„œë¸Œ ì¹´í…Œê³ ë¦¬ ì„œì¹˜
 	public List<CategoryVO> seachSubCategory(String cate_num);
-	
-//	»óÇ° ÀúÀå
+
+//	ìƒí’ˆ ì €ì¥
 	public int registration(ProductVO product);
+
+//	ì˜µì…˜ ì €ì¥
+	public int setOption(OptionVO option);
+
 }

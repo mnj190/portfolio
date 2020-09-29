@@ -36,8 +36,7 @@ public class MemberController {
 		logger.info(pw);
 
 		if (memberSVC.id_check(id) == null) {
-			logger.info("Á¸ÀçÇÏÁö¾Ê´Â¾ÆÀÌµğ");
-			model.addAttribute("err_msg", "Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğÀÔ´Ï´Ù.");
+			model.addAttribute("err_msg", "ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””ì…ë‹ˆë‹¤");
 
 			return "member/loginFrm";
 		} else {
@@ -48,7 +47,7 @@ public class MemberController {
 				session.setAttribute("member", memberVO);
 
 			} else {
-				model.addAttribute("err_msg", "ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.");
+				model.addAttribute("err_msg", "ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.");
 
 				return "member/loginFrm";
 			}

@@ -55,9 +55,17 @@ public class SellerController {
 	public String modification(HttpSession session, @RequestBody ProductVO param) throws Exception {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		param.setUcode(member.getUcode());
+
+		if (param.getProd_thumb0_str() != null)
+			param.setProd_thumb0(param.getProd_thumb0_str().getBytes());
+		if (param.getProd_thumb1_str() != null)
+			param.setProd_thumb1(param.getProd_thumb1_str().getBytes());
+		if (param.getProd_thumb2_str() != null)
+			param.setProd_thumb2(param.getProd_thumb2_str().getBytes());
+
 		shopSVC.registration(param);
 
-		logger.info(param.getProd_option());
+		logger.info(param.toString());
 
 		if (!param.getProd_option().equals("f")) {
 			logger.info("옵션 입력");

@@ -467,12 +467,37 @@
 	  else{
 		  const ProductVO = new Object;
 		  const Options = new Array;
+		  const thumbs = document.querySelectorAll('.img_insert_input');
+		  
 		  ProductVO.prod_dep1 = document.querySelector('[data=category_dep1]').value;
 		  ProductVO.prod_dep2 = document.querySelector('[data=category_dep2]').value;
 		  ProductVO.prod_name = document.querySelector('[data=product_name]').value;
 		  ProductVO.prod_price = document.querySelector('[data=product_price]').value;
 		  ProductVO.prod_quantity = document.querySelector('[data=product_quantity]').value;
 		  ProductVO.prod_description = document.querySelector('[data=product_description]').innerHTML;
+
+		  thumbs.forEach((e, i)=>{
+			  setTimeout(() => {
+				  if(e.value != ''){
+					  const reader = new FileReader();
+					  reader.readAsDataURL(e.files[0]);
+	
+					  reader.addEventListener('load', () => {
+				          console.log('로드됨');
+				          if (reader.readyState == 2)
+						          if(i == 0){
+						        	  ProductVO.prod_thumb0 = reader.result;
+							          console.log(ProductVO.prod_thumb0);
+							          } else if (i == 1){
+							        	  ProductVO.prod_thumb1 = reader.result;
+								          } else if (i == 2){
+								        	  ProductVO.prod_thumb2 = reader.result;
+									          }
+				        });	        	    					  
+					  }
+			  }, 100);
+			  });
+
 		  
 		  if(document.querySelector('[name=product_option_btn]:checked').value == 'f'){
 			  ProductVO.prod_option = 'f'
@@ -488,7 +513,7 @@
 					  OptionVO.op_add_price = e.querySelector('input[data=op__add_price]').value;
 					  OptionVO.op_state = e.querySelector('[data=op_state]').value;
 					  OptionVO.op_quantity = e.querySelector('input[data=op_quantity]').value;
-					  if(document.querySelector('.option_dep1_name')){
+					  if(document.querySelector('.option_dep2_name')){
 						  OptionVO.op_dep2_name = document.querySelector('.option_dep2_name').value
 						  OptionVO.op_dep2_value = e.querySelector('td[data=op_dep2_value]').innerHTML;
 						  }
@@ -497,8 +522,8 @@
 		  }
 
 		  ProductVO.optionVO = Options
-	  	
-		  var formData = new FormData();    
+
+		  setTimeout(() => {
 		  var ajax = new XMLHttpRequest();		  
 			ajax.onreadystatechange = function(e) {
 				if (ajax.readyState === ajax.DONE) {
@@ -515,6 +540,9 @@
 				prod_quantity : ProductVO.prod_quantity,
 				prod_description : ProductVO.prod_description,
 				prod_option : ProductVO.prod_option,
+				prod_thumb0_str : ProductVO.prod_thumb0,
+				prod_thumb1_str : ProductVO.prod_thumb1,
+				prod_thumb2_str : ProductVO.prod_thumb2,
 				optionVO : ProductVO.optionVO
 			});			
 			
@@ -523,6 +551,7 @@
 			ajax.open("POST", contextPath+"/seller/registration", false);
 			ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");			
 			ajax.send(result);
+		  }, 400)
 		  }
 	  })  
 </script>

@@ -1,6 +1,9 @@
 package com.my.test.shop.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.my.test.member.vo.MemberVO;
 import com.my.test.shop.svc.ShopSVC;
@@ -56,13 +61,6 @@ public class SellerController {
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		param.setUcode(member.getUcode());
 
-		if (param.getProd_thumb0_str() != null)
-			param.setProd_thumb0(param.getProd_thumb0_str().getBytes());
-		if (param.getProd_thumb1_str() != null)
-			param.setProd_thumb1(param.getProd_thumb1_str().getBytes());
-		if (param.getProd_thumb2_str() != null)
-			param.setProd_thumb2(param.getProd_thumb2_str().getBytes());
-
 		shopSVC.registration(param);
 
 		logger.info(param.toString());
@@ -78,6 +76,32 @@ public class SellerController {
 
 		logger.info(param.getProd_num());
 
-		return null;
+		return param.getProd_num();
+	}
+
+	@RequestMapping(value = "/setImg", produces = "application/text;charset=utf-8")
+	@ResponseBody
+	public String set_photo(MultipartHttpServletRequest mtf) throws Exception {
+		File filePath = new File(
+				"C:\\Users\\mnj19\\git\\portfolio\\mnj190\\project\\studytest2\\src\\main\\webapp\\resources\\prod_img");
+
+		// 파일 태그
+		String fileTag = "file";
+		System.out.println("filePath.getPath() == " + filePath.getPath());
+		StringBuilder sb = new StringBuilder(filePath.getPath());
+		// 파일 이름
+		MultipartFile file = mtf.getFile(fileTag);
+		String fileName = file.getOriginalFilename();
+		String extension = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+		UUID uuid = UUID.randomUUID();
+		String newFileName = uuid.toString() + extension;
+		sb.append("\\" + newFileName);
+		FileOutputStream fos = null;
+		File newFile = new File(sb.toString());
+		fos = new FileOutputStream(newFile);
+		fos.write(mtf.getFile(fileTag).getBytes());
+		fos.close();
+
+		return newFileName;
 	}
 }

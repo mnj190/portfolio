@@ -295,6 +295,13 @@
 		</dependency>
 		<!-- mail 종료 -->
 
+		<!-- 파일 업로드 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
+
 		<!-- Jasypt(Java Simplified Encryption)를 이용한 Properties 파일 암호화 -->
 		<dependency>
 			<groupId>org.jasypt</groupId>

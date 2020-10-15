@@ -50,5 +50,58 @@
 		#{op_state}, #{op_quantity})
 	</insert>
 
+	<select id="getTotolProd" parameterType="String"
+		resultType="int">
+		select count(*) from product where prod_dep2 = #{cate}
+	</select>
+
+	<select id="getProducts" parameterType="map"
+		resultType="com.my.test.shop.vo.ProductVO">
+		select prod_num, prod_name, prod_price,
+		prod_thumb0,
+		prod_purchases from(
+		select prod_num, prod_name, prod_price,
+		prod_thumb0,
+		prod_purchases, row_number()
+		over(order by PROD_NUM desc)
+		as num from
+		PRODUCT where prod_dep2= #{cate}
+		)
+		where num BETWEEN
+		#{str_num} and #{end_num}
+	</select>
+
+	<select id="getProduct" parameterType="String"
+		resultType="com.my.test.shop.vo.ProductVO">
+		select * from product where prod_num = #{num}
+	</select>
+
+	<select id="getOp_names" parameterType="String"
+		resultType="com.my.test.shop.vo.OptionVO">
+		select DISTINCT op_dep1_name, op_dep2_name from options
+		where prod_num = #{num}
+	</select>
+
+	<select id="getOp_dep1_value" parameterType="String"
+		resultType="com.my.test.shop.vo.OptionVO">
+		select DISTINCT op_dep1_name, op_dep1_value from options
+		where prod_num = #{num}
+	</select>
+
+	<select id="getOptions1" parameterType="String"
+		resultType="com.my.test.shop.vo.OptionVO">
+		select * from options
+		where prod_num = #{num}
+	</select>
+
+	<select id="getOptions2"
+		parameterType="com.my.test.shop.vo.OptionVO"
+		resultType="com.my.test.shop.vo.OptionVO">
+		select * from options
+		where prod_num = #{prod_num} and
+		op_dep1_value = #{op_dep1_value}
+	</select>
+
+
 
 </mapper>

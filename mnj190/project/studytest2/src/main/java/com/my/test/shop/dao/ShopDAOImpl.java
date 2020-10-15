@@ -1,6 +1,7 @@
 package com.my.test.shop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -49,5 +50,53 @@ public class ShopDAOImpl implements ShopDAO {
 	public int setOption(OptionVO option) {
 		// TODO Auto-generated method stub
 		return sqlsession.insert("mappers.ShopDAO-mapper.setOption", option);
+	}
+
+//	카테고리별 상품 수
+	public int getTotolProd(String cate) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mappers.ShopDAO-mapper.getTotolProd", cate);
+	}
+
+//  카테고리 상품 리스트
+	@Override
+	public List<ProductVO> getProducts(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mappers.ShopDAO-mapper.getProducts", map);
+	}
+
+//  상품 가져오기
+	@Override
+	public ProductVO getProduct(String num) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectOne("mappers.ShopDAO-mapper.getProduct", num);
+	}
+
+//	옵션 이름 가져오기
+	@Override
+	public List<ProductVO> getOp_names(String num) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mappers.ShopDAO-mapper.getOp_names", num);
+	}
+
+//	옵션1 밸류 가져오기
+	@Override
+	public List<ProductVO> getOp_dep1_value(String num) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mappers.ShopDAO-mapper.getOp_dep1_value", num);
+	}
+
+//	옵션1 가져오기
+	@Override
+	public List<ProductVO> getOptions1(String num) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mappers.ShopDAO-mapper.getOptions1", num);
+	}
+
+//	옵션2 가져오기
+	@Override
+	public List<ProductVO> getOptions2(OptionVO option) {
+		// TODO Auto-generated method stub
+		return sqlsession.selectList("mappers.ShopDAO-mapper.getOptions2", option);
 	}
 }

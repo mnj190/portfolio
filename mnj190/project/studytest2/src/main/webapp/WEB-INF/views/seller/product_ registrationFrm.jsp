@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script type="text/javascript">
+var contextPath = "${pageContext.request.contextPath}"</script>
 </head>
-
 <body>
 	<div class="from900">
 		<div class="content_title">상품 등록</div>
@@ -185,7 +186,7 @@
 				};
 			}}
 
-	  ajax.open("POST", contextPath+"/seller/seachSubCategory", false);	
+	  ajax.open("POST", contextPath + "/seller/seachSubCategory", false);	
 	  ajax.send(category_dep1.value);
 	  
 	  })
@@ -247,10 +248,9 @@
       }
 
       const added_image_box = document.createElement('img');
-
+      
       added_image_box.classList.add('added_image_box');
       added_image_box.src = window.URL.createObjectURL(e.target.files[0]);
-
       image_box.querySelector('.product_image_btn2').style.display = null;
       image_box.append(added_image_box);
     }
@@ -476,28 +476,33 @@
 		  ProductVO.prod_quantity = document.querySelector('[data=product_quantity]').value;
 		  ProductVO.prod_description = document.querySelector('[data=product_description]').innerHTML;
 
-		  thumbs.forEach((e, i)=>{
-			  setTimeout(() => {
-				  if(e.value != ''){
-					  const reader = new FileReader();
-					  reader.readAsDataURL(e.files[0]);
-	
-					  reader.addEventListener('load', () => {
-				          console.log('로드됨');
-				          if (reader.readyState == 2)
-						          if(i == 0){
-						        	  ProductVO.prod_thumb0 = reader.result;
-							          console.log(ProductVO.prod_thumb0);
-							          } else if (i == 1){
-							        	  ProductVO.prod_thumb1 = reader.result;
-								          } else if (i == 2){
-								        	  ProductVO.prod_thumb2 = reader.result;
-									          }
-				        });	        	    					  
-					  }
-			  }, 100);
-			  });
-
+		  thumbs.forEach((e,i)=>{
+				if(e.value != ''){
+					 const formData = new FormData();
+                     formData.append("file", e.files[0]); 
+					 const ajax = new XMLHttpRequest();
+				      ajax.onreadystatechange = function () {
+				          if (ajax.readyState === ajax.DONE) {
+				              if (ajax.status === 200   || ajax.status === 201) {
+					              if(i==0){
+					            	  ProductVO.prod_thumb0 = ajax.responseText;
+						              } else if(i==1){
+						            	  ProductVO.prod_thumb1 = ajax.responseText;
+							              } else if(i==2){
+							            	  ProductVO.prod_thumb2 = ajax.responseText;
+								              }				            	   
+				              } else {
+				                  console.error(ajax.responseText);
+				              }
+				          }               
+				      }
+				      ajax.open(
+				              "POST",   "${pageContext.request.contextPath}/seller/setImg", false); //
+				      ajax.send(formData);
+					}
+			  })
+		  
+	     
 		  
 		  if(document.querySelector('[name=product_option_btn]:checked').value == 'f'){
 			  ProductVO.prod_option = 'f'
@@ -522,13 +527,12 @@
 		  }
 
 		  ProductVO.optionVO = Options
-
-		  setTimeout(() => {
+		
 		  var ajax = new XMLHttpRequest();		  
 			ajax.onreadystatechange = function(e) {
 				if (ajax.readyState === ajax.DONE) {
-					if (ajax.status === 200 || ajax.status === 201) {						
-					
+					if (ajax.status === 200 || ajax.status === 201) {							
+					console.log(ajax.responseText)
 				};
 			}}
 
@@ -540,9 +544,9 @@
 				prod_quantity : ProductVO.prod_quantity,
 				prod_description : ProductVO.prod_description,
 				prod_option : ProductVO.prod_option,
-				prod_thumb0_str : ProductVO.prod_thumb0,
-				prod_thumb1_str : ProductVO.prod_thumb1,
-				prod_thumb2_str : ProductVO.prod_thumb2,
+				prod_thumb0 : ProductVO.prod_thumb0,
+				prod_thumb1 : ProductVO.prod_thumb1,
+				prod_thumb2 : ProductVO.prod_thumb2,
 				optionVO : ProductVO.optionVO
 			});			
 			
@@ -550,8 +554,7 @@
 			
 			ajax.open("POST", contextPath+"/seller/registration", false);
 			ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");			
-			ajax.send(result);
-		  }, 400)
+			ajax.send(result);		
 		  }
 	  })  
 </script>

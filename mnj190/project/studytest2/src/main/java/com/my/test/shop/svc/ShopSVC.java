@@ -23,4 +23,24 @@ public interface ShopSVC {
 //	옵션 저장
 	public int setOption(OptionVO option);
 
+//	총 상품 수
+	public int getTotolProd(String cate);
+
+//	상품 목록
+	public List<ProductVO> getProductList(String cate, String page, String getStr_num, String getEnd_num);
+
+//  상품 가져오기
+	public ProductVO getProduct(String num);
+
+//	옵션 이름 가져오기
+	public List<ProductVO> getOp_names(String num);
+
+//	옵션1 밸류 가져오기
+	public List<ProductVO> getOp_dep1_value(String num);
+
+//	옵션1 가져오기
+	public List<ProductVO> getOptions1(String num);
+
+//	옵션2 가져오기
+	public List<ProductVO> getOptions2(OptionVO option);
 }

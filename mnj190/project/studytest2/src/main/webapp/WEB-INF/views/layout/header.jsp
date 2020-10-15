@@ -15,10 +15,12 @@ html, body {
 }
 
 header {
+	min-width: 1000px;
 	margin: 0;
 	padding: 0;
 	background-color: #1f8ce6;
 	text-align: center;
+	margin: 0;
 }
 
 header .header .logo {
@@ -140,9 +142,11 @@ nav .nav_menu_list {
 }
 
 nav {
+	min-width: 1000px;
 	border-bottom: 1px #ebecef solid;
 	position: relative;
 	height: 42px;
+	border-bottom: 1px #ebecef solid;
 }
 
 header .attach_menu {
@@ -321,7 +325,7 @@ header .attach_menu .menu_list a {
 
 					 		for(var j = 0; j < subcategory.length; j++){
 								if(subcategory[j].parent_num == category[i].cate_num) {
-									add_cate.innerHTML += '<dd><a href="#">'+subcategory[j].cate_name+'</a></dd>'
+									add_cate.innerHTML += '<dd><a href="${pageContext.request.contextPath}/shop?cate='+subcategory[j].cate_num+'&type=A&page=1">'+subcategory[j].cate_name+'</a></dd>'
 								}
 							}  
         						

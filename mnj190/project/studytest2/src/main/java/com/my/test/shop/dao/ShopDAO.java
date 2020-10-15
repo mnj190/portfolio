@@ -1,6 +1,7 @@
 package com.my.test.shop.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
@@ -22,4 +23,24 @@ public interface ShopDAO {
 //	옵션 저장
 	public int setOption(OptionVO option);
 
+//	카테고리별 상품 수
+	public int getTotolProd(String cate);
+
+//  카테고리 상품 리스트
+	public List<ProductVO> getProducts(Map<String, String> map);
+
+//  상품 가져오기
+	public ProductVO getProduct(String num);
+
+//	옵션 이름 가져오기
+	public List<ProductVO> getOp_names(String num);
+
+//	옵션1 밸류 가져오기
+	public List<ProductVO> getOp_dep1_value(String num);
+
+//	옵션1 가져오기
+	public List<ProductVO> getOptions1(String num);
+
+//	옵션2 가져오기
+	public List<ProductVO> getOptions2(OptionVO option);
 }

@@ -6,8 +6,12 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.my.test.common.paging.Paging;
+import com.my.test.shop.controller.ShopController;
 import com.my.test.shop.dao.ShopDAO;
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
@@ -15,6 +19,7 @@ import com.my.test.shop.vo.ProductVO;
 
 @Repository
 public class ShopSVCImpl implements ShopSVC {
+	private static final Logger logger = LoggerFactory.getLogger(ShopSVCImpl.class);
 
 	@Inject
 	ShopDAO shopDAO;
@@ -52,4 +57,56 @@ public class ShopSVCImpl implements ShopSVC {
 		// TODO Auto-generated method stub
 		return shopDAO.setOption(option);
 	}
+
+//	총 상품 수
+	public int getTotolProd(String cate) {
+
+		return shopDAO.getTotolProd(cate);
+	}
+
+//	상품 목록
+	public List<ProductVO> getProductList(String cate, String page, String getStr_num, String getEnd_num) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("cate", cate);
+		map.put("str_num", getStr_num);
+		map.put("end_num", getEnd_num);
+
+		return shopDAO.getProducts(map);
+	}
+
+//  상품 가져오기
+	@Override
+	public ProductVO getProduct(String num) {
+		// TODO Auto-generated method stub
+		return shopDAO.getProduct(num);
+	}
+
+//	옵션 이름 가져오기
+	@Override
+	public List<ProductVO> getOp_names(String num) {
+		// TODO Auto-generated method stub
+		return shopDAO.getOp_names(num);
+	}
+
+//	옵션1 밸류 가져오기
+	@Override
+	public List<ProductVO> getOp_dep1_value(String num) {
+		// TODO Auto-generated method stub
+		return shopDAO.getOp_dep1_value(num);
+	}
+
+//	옵션1 가져오기
+	@Override
+	public List<ProductVO> getOptions1(String num) {
+		// TODO Auto-generated method stub
+		return shopDAO.getOptions1(num);
+	}
+
+//	옵션2 가져오기
+	@Override
+	public List<ProductVO> getOptions2(OptionVO option) {
+		// TODO Auto-generated method stub
+		return shopDAO.getOptions2(option);
+	}
+
 }

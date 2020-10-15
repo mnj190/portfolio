@@ -1,5 +1,9 @@
 package com.my.test.shop;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.junit.jupiter.api.Disabled;
@@ -12,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.my.test.shop.dao.ShopDAO;
+import com.my.test.shop.vo.ProductVO;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/*.xml" })
@@ -32,9 +37,42 @@ public class ShopDAOImplTest {
 
 	@Test
 	@DisplayName("서브 카테고리 서치")
-//	@Disabled
+	@Disabled
 	void seachSubCategory() {
 		String cate_num = "2";
 		logger.info(shopDAO.seachSubCategory(cate_num).toString());
 	}
+
+	@Test
+	@DisplayName("총 상품 수")
+	@Disabled
+	void getTotalProd() {
+		String cate = "8";
+		logger.info(String.valueOf(shopDAO.getTotolProd(cate)));
+	}
+
+	@Test
+	@DisplayName("총 상품 수")
+	@Disabled
+	void getProducts() {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("cate", "8");
+		map.put("str_num", "1");
+		map.put("end_num", "2");
+		logger.info("실행됨");
+		List<ProductVO> xxx = shopDAO.getProducts(map);
+		logger.info(xxx.get(0).getProd_name());
+	}
+
+	@Test
+	@DisplayName("상품 가져오기")
+//	@Disabled
+	void getProduct() {
+		String num = "109";
+		logger.info("실행됨");
+		ProductVO xxx = shopDAO.getProduct(num);
+		logger.info(xxx.toString());
+	}
+	
+	
 }

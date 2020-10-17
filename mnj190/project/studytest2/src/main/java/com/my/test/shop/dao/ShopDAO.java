@@ -5,6 +5,8 @@ import java.util.Map;
 
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
+import com.my.test.shop.vo.Order_detailsVO;
+import com.my.test.shop.vo.OrdersVO;
 import com.my.test.shop.vo.ProductVO;
 
 public interface ShopDAO {
@@ -43,4 +45,10 @@ public interface ShopDAO {
 
 //	옵션2 가져오기
 	public List<ProductVO> getOptions2(OptionVO option);
+
+//	주문 등록
+	public int setOrders(OrdersVO orders);
+
+//	주문 상세 내역 등록
+	public int setDetails(Order_detailsVO details);
 }

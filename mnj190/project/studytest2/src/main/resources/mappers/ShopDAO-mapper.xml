@@ -102,6 +102,30 @@
 		op_dep1_value = #{op_dep1_value}
 	</select>
 
+	<insert id="setOrders"
+		parameterType="com.my.test.shop.vo.OrdersVO">
+		insert into orders (orders_num, prod_num, orderer,
+		seller,
+		orders_address, orders_payment, orders_quantity,
+		orders_option) values
+		(orders_num_seq.nextval, #{prod_num}, #{orderer},
+		#{seller},
+		#{orders_address}, #{orders_payment}, #{orders_quantity},
+		#{orders_option})
 
+		<selectKey resultType="String" keyProperty="orders_num"
+			order="AFTER">
+			SELECT orders_num_SEQ.CURRVAL FROM DUAL
+		</selectKey>
+	</insert>
+
+	<insert id="setDetails"
+		parameterType="com.my.test.shop.vo.Order_detailsVO">
+		insert into Order_details (details_num, orders_num,
+		prod_num,
+		details_quantity, op_num) values
+		(DETAILS_NUM_SEQ.nextval,
+		#{orders_num}, #{prod_num}, #{details_quantity}, #{op_num})
+	</insert>
 
 </mapper>

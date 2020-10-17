@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
+import com.my.test.shop.vo.OrdersVO;
 import com.my.test.shop.vo.ProductVO;
 
 public interface ShopSVC {
@@ -43,4 +44,7 @@ public interface ShopSVC {
 
 //	옵션2 가져오기
 	public List<ProductVO> getOptions2(OptionVO option);
+	
+//	주문 등록
+	public int setOrders(OrdersVO orders);
 }

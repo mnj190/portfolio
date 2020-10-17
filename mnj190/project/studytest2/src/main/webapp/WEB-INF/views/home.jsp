@@ -22,7 +22,8 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <script type="text/javascript">
-var contextPath = "${pageContext.request.contextPath}"</script>
+	var contextPath = "${pageContext.request.contextPath}"
+</script>
 </head>
 <body>
 

@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -25,6 +26,10 @@
 	<div class="item_top_info_wrap">
 		<c:set var="prod" value="${requestScope.product }" />
 		<input type="hidden" class="prod_num" value="${prod.prod_num }">
+		<input type="hidden" class="prod_price" value="${prod.prod_price }">
+		<input type="hidden" class="prod_option" value="${prod.prod_option }">
+		<input type="hidden" class="ucode" value="${prod.ucode }"> <input
+			type="hidden" id="login_result">
 		<div class="item_top_gallary">
 			<div class="viewer_container">
 				<ul class="viewer">
@@ -52,7 +57,7 @@
 								alt=""></li>
 						</c:if>
 						<c:if test="${prod.prod_thumb1 ne null }">
-							<li"><img class="btn thumb_preview"
+							<li><img class="btn thumb_preview"
 								src="${pageContext.request.contextPath}/prod_img/${prod.prod_thumb1 }"
 								alt=""></li>
 						</c:if>
@@ -87,8 +92,8 @@
 			<div class="order_info">
 				<!-- 선택 옵션 -->
 				<div class="select_option_wrap">
-					<h3>옵션 선택</h3>
 					<c:if test="${prod.prod_option eq 'A' }">
+						<h3>옵션 선택</h3>
 						<c:forEach var="names" items="${requestScope.op_names }">
 							<div class="item_options">
 								<button class="item_option_btn btn">
@@ -105,6 +110,7 @@
 						</c:forEach>
 					</c:if>
 					<c:if test="${prod.prod_option eq 'B' }">
+						<h3>옵션 선택</h3>
 						<c:forEach var="names" items="${requestScope.op_names }">
 							<div class="item_options dep1">
 								<button class="item_option_btn btn">
@@ -128,20 +134,45 @@
 						</c:forEach>
 					</c:if>
 
-				</div>
-				<div class="selected_result">
-					<ul class="result_item_list">
+					<c:if test="${prod.prod_option eq 'f' }">
+						<div class="selected_result">
+							<ul class="result_item_list">
+								<li class="added_prod">
+									<div class="first_result">
+										<span> 수량 </span>
+									</div>
+									<div class="second_result">
+										<input type="number" class="quantity" value="1"><strong
+											class="result_price"><fmt:formatNumber
+												value="${prod.prod_price }" pattern="#,###,###,###" />원 </strong>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</c:if>
 
-					</ul>
+
+					<div class="selected_result">
+						<ul class="result_item_list">
+
+						</ul>
+					</div>
+					<div class="total_price">
+						<span class="total_txt">총 상품금액</span><span class="total_price_txt"><fmt:formatNumber
+								value="${prod.prod_price }" pattern="#,###,###,###" />원</span>
+						<c:if test="${prod.prod_option eq 'f' }">
+							<input type="hidden" class="total_price_value"
+								value="${prod.prod_price }">
+						</c:if>
+						<c:if test="${prod.prod_option ne 'f' }">
+							<input type="hidden" class="total_price_value" value="0">
+						</c:if>
+					</div>
 				</div>
-				<div class="total_price">
-					<span class="total_txt">총 상품금액</span><span class="total_price_txt">0원</span>
-					<input type="hidden" class="total_price_value" value="0">
+				<div class="item_bottom_btn_area">
+					<button class="keep_btn btn">장바구니</button>
+					<button class="buy_btn btn">구매</button>
 				</div>
-			</div>
-			<div class="item_bottom_btn_area">
-				<button class="keep_btn btn">장바구니</button>
-				<button class="buy_btn btn">구매</button>
 			</div>
 		</div>
 	</div>
@@ -151,9 +182,11 @@
   // 옵션 선택
   const order_info = document.querySelector('.order_info');
   const result_item_list = document.querySelector('.result_item_list');
+  const price_value = document.querySelector('.prod_price').value;
   const total_price_value = document.querySelector('.total_price_value');
   const total_price_txt = document.querySelector('.total_price_txt');
-  
+  const ucode = document.querySelector('.ucode');
+
   order_info.addEventListener('click', (e) => {
     if (e.target.classList.contains('item_option_btn')) {
         if(e.target.classList.contains('unusable')){
@@ -235,7 +268,7 @@
 					const li = document.createElement('li')
 					li.classList.add('added_prod');
 					const dep2_info = e.target.closest('.dep2_info');
-					const number2 = dep2_info.querySelector('.op_add_price').value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+					const number2 = (parseInt(price_value) + parseInt(dep2_info.querySelector(".op_add_price").value)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 					li.innerHTML = '<div class="first_result"> <span> '+ seleted.innerHTML +'<br>'+e.target.innerHTML+'</span> </div>'
 					li.innerHTML +=	'<div class="second_result"> <input type="number" class="quantity" value="1"><strong><span class="result_price">'+number2+'원 </span> <a href="#"><i class="fas fa-times item_cancel_btn"></i></a> </strong> </div>';
 					li.innerHTML += '<input type="hidden" class="op_num" value ='+dep2_info.querySelector('.op_num').value+'>';
@@ -247,8 +280,9 @@
 					seleted.innerHTML = seleted.getAttribute('data-textinit');
 
 					result_item_list.append(li);
-					total_price_value.value = parseInt(total_price_value.value) + parseInt(dep2_info.querySelector('.op_add_price').value);
-					const number = total_price_value.value
+					
+					total_price_value.value = parseInt(total_price_value.value) + parseInt(price_value) + parseInt(dep2_info.querySelector(".op_add_price").value);
+					const number = total_price_value.value;
 					total_price_txt.innerHTML = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';			
 					}	
 			}          
@@ -262,12 +296,70 @@
 		console.log(parseInt(quantity.value));
 		console.log(parseInt(op_add_price.value));
    	   	
-   	    total_price_value.value = parseInt(total_price_value.value) - (parseInt(quantity.value) * parseInt(op_add_price.value));
+   	    total_price_value.value = parseInt(total_price_value.value) - (parseInt(quantity.value) * (parseInt(price_value) + parseInt(op_add_price.value)));
    		const number = total_price_value.value
 		total_price_txt.innerHTML = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
 
    		added_prod.remove();
    	   	}
+
+   	if(e.target.classList.contains('buy_btn')){
+		console.log('클릭됨');
+		
+    	const prod_num = document.querySelector('.prod_num').value;		
+		const details = new Array();
+		let added_prod;
+		let quantity;
+		
+		if(prod_option != 'f'){
+			quantity = null;
+
+			added_prod = result_item_list.querySelectorAll('.added_prod');
+			Array.prototype.forEach.call(added_prod, (elem, index) => {
+				const Order_detailsVO = new Object();
+				Order_detailsVO.prod_num = prod_num;
+				Order_detailsVO.details_quantity = elem.querySelector('.quantity').value;
+				Order_detailsVO.op_num = elem.querySelector('.op_num').value;
+				details.push(Order_detailsVO);
+				})
+			} else if(prod_option == 'f'){
+				quantity = document.querySelector('.quantity').value;
+			  }
+
+		const ajax = new XMLH
+		ttpRequest();
+    	
+		ajax.onreadystatechange = function(e) {
+			if (ajax.readyState === ajax.DONE) {
+				if (ajax.status === 200 || ajax.status === 201) {
+					console.log(ajax.responseText);
+					if(ajax.responseText == 'fail'){
+						window.open(contextPath+"/loginFrm?reqURI=seccess","_blank","height=500,width=500, status=yes,toolbar=no,menubar=no,location=no");
+
+								} else if (ajax.responseText == 'success'){
+							setTimeout(function() {
+								alert('주문이 완료되었습니다.');
+								location.reload();
+								}, 100);
+							}
+			}
+		}}
+
+		const result = JSON.stringify({
+			prod_num : prod_num,
+			seller : ucode.value,
+			orders_payment : total_price_value.value,
+			orders_quantity : quantity,
+			orders_option : prod_option,
+			order_details : details
+			});
+
+		console.log(result);
+
+	    ajax.open("POST", contextPath + "/shop/order", false);
+		ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");	
+	    ajax.send(result);
+   	   	}   	   	
   })
   
   result_item_list.addEventListener('change', (e) => {
@@ -276,18 +368,29 @@
 			e.target.value = 1;
 			}
 		  
-	    const added_prod = result_item_list.querySelectorAll('.added_prod');
    	 	total_price_value.value = 0;
-   	 	
-	    Array.prototype.forEach.call(added_prod, (elem, index) => {
-	   	   	const quantity = elem.querySelector('.quantity');
-	   	   	const op_add_price = elem.querySelector('.op_add_price');
-	   	   	const result_price = elem.querySelector('.result_price');	   
 
-	   	   	const number = (parseInt(quantity.value) * parseInt(op_add_price.value));   	   	
-	   	    total_price_value.value = parseInt(total_price_value.value) + parseInt(number);
-	   		result_price.innerHTML = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
-	    });
+   	 	if(prod_option != 'f'){
+   		    const added_prod = result_item_list.querySelectorAll('.added_prod');
+		    Array.prototype.forEach.call(added_prod, (elem, index) => {
+		   	   	const quantity = elem.querySelector('.quantity');
+		   	   	const op_add_price = elem.querySelector('.op_add_price');
+		   	   	const result_price = elem.querySelector('.result_price');	   
+	
+				console.log(price_value);
+				console.log(op_add_price.value);
+				console.log(quantity.value);
+		   	   	
+		   	   	const number = (parseInt(quantity.value) * (parseInt(price_value) + parseInt(op_add_price.value)));   	   	
+		   	    total_price_value.value = parseInt(total_price_value.value) + parseInt(number);
+		   		result_price.innerHTML = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
+		    });
+   	 	} else if (prod_option == 'f'){
+   	   	 		const quantity = document.querySelector('.quantity').value;
+		   	   	const result_price = document.querySelector('.result_price');	
+   	   	 		total_price_value.value = parseInt(price_value) * parseInt(quantity);
+   	   	 		result_price.innerHTML = total_price_value.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';	
+   	   	 	}
 
    		const number = total_price_value.value
 		total_price_txt.innerHTML = number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+'원';
@@ -312,6 +415,10 @@
 						})					
 				}
   	  	})  	
+  	
+  	var login_result = () => {
+			document.querySelector('.buy_btn').click();
+  	  	}
 </script>
 
 <style>

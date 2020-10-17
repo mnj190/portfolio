@@ -15,6 +15,8 @@ import com.my.test.shop.controller.ShopController;
 import com.my.test.shop.dao.ShopDAO;
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
+import com.my.test.shop.vo.Order_detailsVO;
+import com.my.test.shop.vo.OrdersVO;
 import com.my.test.shop.vo.ProductVO;
 
 @Repository
@@ -107,6 +109,22 @@ public class ShopSVCImpl implements ShopSVC {
 	public List<ProductVO> getOptions2(OptionVO option) {
 		// TODO Auto-generated method stub
 		return shopDAO.getOptions2(option);
+	}
+
+//	주문 등록
+	@Override
+	public int setOrders(OrdersVO orders) {
+
+		shopDAO.setOrders(orders);
+		logger.info(orders.getOrders_num());
+
+		if (!orders.getOrders_option().equals("f")) {
+			for (Order_detailsVO details : orders.getOrder_details()) {
+				details.setOrders_num(orders.getOrders_num());
+				shopDAO.setDetails(details);
+			}
+		}
+		return 0;
 	}
 
 }

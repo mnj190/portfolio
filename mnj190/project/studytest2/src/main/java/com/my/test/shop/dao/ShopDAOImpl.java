@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
+import com.my.test.shop.vo.Order_detailsVO;
+import com.my.test.shop.vo.OrdersVO;
 import com.my.test.shop.vo.ProductVO;
 
 @Repository
@@ -98,5 +100,19 @@ public class ShopDAOImpl implements ShopDAO {
 	public List<ProductVO> getOptions2(OptionVO option) {
 		// TODO Auto-generated method stub
 		return sqlsession.selectList("mappers.ShopDAO-mapper.getOptions2", option);
+	}
+
+//	주문 등록
+	@Override
+	public int setOrders(OrdersVO orders) {
+		// TODO Auto-generated method stub
+		return sqlsession.insert("mappers.ShopDAO-mapper.setOrders", orders);
+	}
+
+//	주문 상세 내역 등록
+	@Override
+	public int setDetails(Order_detailsVO details) {
+		// TODO Auto-generated method stub
+		return sqlsession.insert("mappers.ShopDAO-mapper.setDetails", details);
 	}
 }

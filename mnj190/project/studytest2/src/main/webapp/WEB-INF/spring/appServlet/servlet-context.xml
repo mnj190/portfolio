@@ -14,7 +14,6 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
@@ -22,6 +21,26 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 	<resources mapping="/prod_img/**"
 		location="/resources/prod_img/" />
+
+	<!-- interceptor 설정 -->
+	<interceptors>
+		<!-- 자동 로그인 -->
+		<interceptor>
+			<!-- 1) 특정 uri지정 -->
+			<mapping path="/**" />
+			<!-- 2) interceptor구현 클래스 -->
+			<beans:bean id="autoLoginInterceptor"
+				class="com.my.test.common.interceptor.AutoLoginInterceptor" />
+		</interceptor>
+		<interceptor>
+			<!-- 1) 특정 uri지정 -->
+			<mapping path="/mypage/**/" />
+			<mapping path="/seller/**" />
+			<!-- 2) interceptor구현 클래스 -->
+			<beans:bean id="loginInterceptor"
+				class="com.my.test.common.interceptor.AuthenticationInterceptor" />
+		</interceptor>
+	</interceptors>
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->

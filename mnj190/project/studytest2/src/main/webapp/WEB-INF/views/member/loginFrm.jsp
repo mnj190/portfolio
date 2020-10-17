@@ -14,7 +14,8 @@ const contextPath = "${pageContext.request.contextPath}"</script>
 </head>
 <body>
 	<section class="account-login account-container">
-		<form action="${pageContext.request.contextPath}/login"
+		<form
+			action="${pageContext.request.contextPath}/login?reqURI=${reqURI}"
 			class="account-form" method="post">
 			<div class="input-group">
 				<label class="account-label"> <input type="text" name="id"
@@ -34,7 +35,7 @@ const contextPath = "${pageContext.request.contextPath}"</script>
 					</div>
 				</div>
 			</div>
-			<p class="err_msg"></p>
+			<p class="err_msg">${requestScope.err_msg }</p>
 			<button class="login_btn blue_btn full_btn">로그인</button>
 			<button class="signup_btn white_btn full_btn">회원가입</button>
 		</form>

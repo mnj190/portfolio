@@ -69,7 +69,7 @@
     }
 
     if(e.target.classList.contains('orderlist_btn')){
-    	location.replace(contextPath + '/mypage/orderlist');}
+    	location.replace(contextPath + '/mypage/myorders');}
 
 
     if(e.target.classList.contains('refundlist_btn')){

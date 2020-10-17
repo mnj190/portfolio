@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,9 +19,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.my.test.common.paging.Paging;
+import com.my.test.member.vo.MemberVO;
 import com.my.test.shop.svc.ShopSVC;
 import com.my.test.shop.vo.CategoryVO;
 import com.my.test.shop.vo.OptionVO;
+import com.my.test.shop.vo.OrdersVO;
 import com.my.test.shop.vo.ProductVO;
 
 @Controller
@@ -91,10 +94,21 @@ public class ShopController {
 	public List<ProductVO> getOptions2(@RequestBody OptionVO option, Model model) {
 		List<ProductVO> res = shopSVC.getOptions2(option);
 
-		logger.info("호출");
-		logger.info(option.toString());
-		logger.info(res.toString());
-
 		return res;
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/order", produces = "application/json")
+	public String order(@RequestBody OrdersVO order, Model model, HttpSession session) {
+
+		if (session.getAttribute("member") == null) {
+			return "fail";
+		}
+		MemberVO member = (MemberVO) session.getAttribute("member");
+		order.setOrderer(member.getUcode());
+
+		shopSVC.setOrders(order);
+
+		return "success";
 	}
 }

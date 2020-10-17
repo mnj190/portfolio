@@ -19,4 +19,78 @@
 		resultType="com.my.test.member.vo.MemberVO">
 		select * from member where id=#{id}
 	</select>
+
+	<update id="keepLogin" parameterType="map">
+		update member set
+		sessionKey = #{sessionId}, sessionLimit = #{age} where
+		id=#{id}
+	</update>
+
+	<select id="checkUserWithSessionKey" parameterType="string"
+		resultType="com.my.test.member.vo.MemberVO">
+		select * from member where sessionKey = #{sessionId} and
+		sessionLimit >
+		SYSDATE
+	</select>
+
+	<select id="getMyOrders" parameterType="map"
+		resultType="com.my.test.shop.vo.OrdersVO">
+		select t1.ORDERS_NUM, t1.PROD_NUM, ORDERER, SELLER,
+		ORDERS_PAYMENT,
+		ORDERS_QUANTITY, ORDERS_OPTION, ORDERS_DATE,
+		ORDERS_STATE,
+		t2.PROD_NAME, t2.prod_thumb0, t3.id as seller_id,
+		t4.REVIEW_NUM
+		from(
+		select ORDERS_NUM,
+		PROD_NUM,
+		ORDERER,
+		SELLER,
+		ORDERS_PAYMENT, ORDERS_QUANTITY,
+		ORDERS_OPTION,
+		ORDERS_DATE,
+		ORDERS_STATE, row_number()
+		over(order by
+		ORDERS_NUM desc)
+		as num from
+		ORDERS where ORDERER= #{ucode} and
+		ORDERS_DATE > (SELECT
+		SYSDATE -
+		#{term} FROM
+		DUAL)
+		) t1, product t2, member t3, review t4
+		where
+		t1.PROD_NUM = t2.PROD_NUM and t1.seller = t3.ucode and t1.ORDERS_NUM =
+		t4.ORDERS_NUM(+) and
+		num BETWEEN
+		#{str_num} and #{end_num}
+	</select>
+
+	<select id="getTotalOrders" resultType="int" parameterType="map">
+		select count(*) from(
+		select ORDERS_NUM, PROD_NUM,
+		ORDERER,
+		SELLER,
+		ORDERS_PAYMENT, ORDERS_QUANTITY, ORDERS_OPTION,
+		ORDERS_DATE,
+		ORDERS_STATE, row_number()
+		over(order by ORDERS_NUM desc)
+		as num from
+		ORDERS where ORDERER= #{ucode} and ORDERS_DATE > (SELECT
+		SYSDATE -
+		#{term} FROM
+		DUAL)
+		)
+	</select>
+
+	<insert id="setReview"
+		parameterType="com.my.test.shop.vo.ReviewVO">
+		insert into review (review_num, prod_num,
+		review_writer,
+		review_content,
+		review_rating, orders_num) values
+		(review_num_seq.nextval, #{prod_num}, #{review_writer},
+		#{review_content},
+		#{review_rating}, #{orders_num})
+	</insert>
 </mapper>

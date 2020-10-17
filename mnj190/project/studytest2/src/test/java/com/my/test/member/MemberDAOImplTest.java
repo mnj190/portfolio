@@ -1,5 +1,8 @@
 package com.my.test.member;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import org.junit.jupiter.api.Disabled;
@@ -34,7 +37,7 @@ public class MemberDAOImplTest {
 		memberVO.setName("조정민");
 		memberDAO.signup(memberVO);
 	}
-	
+
 	@Test
 	@DisplayName("아이디 체크")
 	void id_check() {

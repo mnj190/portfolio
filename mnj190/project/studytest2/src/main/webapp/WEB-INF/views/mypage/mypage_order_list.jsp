@@ -142,6 +142,7 @@
 .order_list_page .order_list_table .payment {
 	padding: 0;
 	vertical-align: baseline;
+	border-left: 1px #c5c5c5 solid;
 }
 
 .order_list_page .order_list_table .payment .order_date {

@@ -3,6 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<main>
@@ -51,84 +53,37 @@
 				</div>
 				<div class="item_collection_section">
 					<ul class="item_list">
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
+						<c:forEach var="prod" items="${requestScope.resent }">
+							<li>
+								<div class="inner">
+									<a
+										href="${pageContext.request.contextPath}/shop/product?num=${prod.prod_num}">
+										<img class="thumb" src="prod_img/${prod.prod_thumb0}"
+										alt="이미지"> <spna class="item_title">${prod.prod_name}</spna>
+									</a>
+									<div class="item_info">
+										<!-- <strong class="sale"> 69% </strong> -->
+										<span class="price"> <strong><fmt:formatNumber
+													value="${prod.prod_price}" pattern="#,###,###,###" /></strong><span>원</span>
+											<!-- <del>20,000원</del> -->
+										</span>
+										<div class="review_rating">
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 1}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 2}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 3}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 4}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 5}">checked</c:if>"></span><span>
+												(${prod.rating})</span> / <span>구매 : ${prod.cnt}</span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</article>
@@ -139,84 +94,37 @@
 				</div>
 				<div class="item_collection_section">
 					<ul class="item_list">
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
+						<c:forEach var="prod" items="${requestScope.hot_item }">
+							<li>
+								<div class="inner">
+									<a
+										href="${pageContext.request.contextPath}/shop/product?num=${prod.prod_num}">
+										<img class="thumb" src="prod_img/${prod.prod_thumb0}"
+										alt="이미지"> <spna class="item_title">${prod.prod_name}</spna>
+									</a>
+									<div class="item_info">
+										<!-- <strong class="sale"> 69% </strong> -->
+										<span class="price"> <strong><fmt:formatNumber
+													value="${prod.prod_price}" pattern="#,###,###,###" /></strong><span>원</span>
+											<!-- <del>20,000원</del> -->
+										</span>
+										<div class="review_rating">
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 1}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 2}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 3}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 4}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 5}">checked</c:if>"></span><span>
+												(${prod.rating})</span> / <span>구매 : ${prod.cnt}</span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</article>
@@ -227,84 +135,37 @@
 				</div>
 				<div class="item_collection_section">
 					<ul class="item_list">
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
+						<c:forEach var="prod" items="${requestScope.best_review }">
+							<li>
+								<div class="inner">
+									<a
+										href="${pageContext.request.contextPath}/shop/product?num=${prod.prod_num}">
+										<img class="thumb" src="prod_img/${prod.prod_thumb0}"
+										alt="이미지"> <spna class="item_title">${prod.prod_name}</spna>
+									</a>
+									<div class="item_info">
+										<!-- <strong class="sale"> 69% </strong> -->
+										<span class="price"> <strong><fmt:formatNumber
+													value="${prod.prod_price}" pattern="#,###,###,###" /></strong><span>원</span>
+											<!-- <del>20,000원</del> -->
+										</span>
+										<div class="review_rating">
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 1}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 2}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 3}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 4}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 5}">checked</c:if>"></span><span>
+												(${prod.rating})</span> / <span>구매 : ${prod.cnt}</span>
+										</div>
+									</div>
 								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="inner">
-								<a href="#"> <img class="thumb"
-									src="http://image.iacstatic.co.kr/allkill/item/2020/09/20200909174346601r.jpg"
-									alt="이미지"> <spna class="item_title">아이템 이름</spna>
-								</a>
-								<div class="item_info">
-									<strong class="sale"> 69% </strong> <span class="price">
-										<strong>19,000</strong><span>원</span> <del>20,000원</del>
-									</span>
-								</div>
-							</div>
-						</li>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</article>
@@ -348,6 +209,11 @@ main .item_collection .item_collection_title {
 	border: 1px solid #ebecef;
 	box-sizing: border-box;
 	margin-top: 10px;
+	width: 320px;
+}
+
+.item_collection_section .item_list .inner a {
+	width: inherit;
 }
 
 .item_collection_section .item_list .inner:hover {
@@ -355,7 +221,10 @@ main .item_collection .item_collection_title {
 }
 
 .item_collection_section .item_list .inner .thumb {
-	display: inline;
+	display: block;
+	height: 165px;
+	max-width: 318px;
+	margin: auto;
 }
 
 .item_collection_section .item_list .inner .item_title {
@@ -399,6 +268,10 @@ main .item_collection .item_collection_title {
 main .event_slid {
 	width: 1000px !important;
 	margin: auto;
+}
+
+.rating.checked {
+	color: orange;
 }
 </style>
 </html>

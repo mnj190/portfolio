@@ -63,7 +63,7 @@
 		t1.PROD_NUM = t2.PROD_NUM and t1.seller = t3.ucode and t1.ORDERS_NUM =
 		t4.ORDERS_NUM(+) and
 		num BETWEEN
-		#{str_num} and #{end_num}
+		#{str_num} and #{end_num} order by num
 	</select>
 
 	<select id="getTotalOrders" resultType="int" parameterType="map">

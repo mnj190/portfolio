@@ -98,6 +98,25 @@ public class ShopController {
 	}
 
 	@ResponseBody
+	@RequestMapping(value = "/login_ck")
+	public String login_ck(HttpSession session) {
+
+		if (session.getAttribute("member") == null) {
+			return "fail";
+		}
+
+		return "success";
+	}
+
+	@RequestMapping(value = "/payment")
+	public String payment(@RequestParam(required = false) String data, Model model, HttpSession session) {
+
+		model.addAttribute("data", data);
+
+		return "shop/payment";
+	}
+
+	@ResponseBody
 	@RequestMapping(value = "/order", produces = "application/json")
 	public String order(@RequestBody OrdersVO order, Model model, HttpSession session) {
 
@@ -106,6 +125,8 @@ public class ShopController {
 		}
 		MemberVO member = (MemberVO) session.getAttribute("member");
 		order.setOrderer(member.getUcode());
+
+		logger.info(order.toString());
 
 		shopSVC.setOrders(order);
 

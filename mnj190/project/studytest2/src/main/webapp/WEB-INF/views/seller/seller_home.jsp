@@ -25,10 +25,14 @@
 			file="/WEB-INF/views/seller/seller_sidemenu.jsp"%>
 		</sidemenu>
 
-		<content> <!-- modification --> <%@ include
-			file="/WEB-INF/views/seller/product_ registrationFrm.jsp"%>
-		</content>
+		<content> <!-- modification --> <c:if
+			test="${requestScope.request eq 'registrationFrm' }"><%@ include
+				file="/WEB-INF/views/seller/product_ registrationFrm.jsp"%>
+		</c:if> </content>
 
 	</main>
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 </html>

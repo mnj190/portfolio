@@ -1,10 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>·Î±×ÀÎ</title>
+<title>ë¡œê·¸ì¸</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
@@ -13,31 +11,33 @@
 const contextPath = "${pageContext.request.contextPath}"</script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/layout/logo.jsp"%>
+
 	<section class="account-login account-container">
 		<form
 			action="${pageContext.request.contextPath}/login?reqURI=${reqURI}"
 			class="account-form" method="post">
 			<div class="input-group">
 				<label class="account-label"> <input type="text" name="id"
-					id="id" placeholder="¾ÆÀÌµğ" autocomplete="off" class="login_input">
+					id="id" placeholder="ì•„ì´ë””" autocomplete="off" class="login_input">
 				</label> <label class="account-label"> <input type="password"
-					name="pw" id="pw" placeholder="ºñ¹Ğ¹øÈ£" autocomplete="off"
+					name="pw" id="pw" placeholder="ë¹„ë°€ë²ˆí˜¸" autocomplete="off"
 					class="login_input">
 				</label>
 				<div class="login_menu_wrapper">
 					<label class="auto_login_check"> <input type="checkbox"
-						name="auto_login" class="auto_login"> <span>·Î±×ÀÎ »óÅÂ
-							À¯Áö</span>
+						name="auto_login" class="auto_login"> <span>ë¡œê·¸ì¸ ìƒíƒœ
+							ìœ ì§€</span>
 					</label>
 					<div class="external_links">
-						<a href="#" class="link">¾ÆÀÌµğ Ã£±â</a> <a href="#" class="link">ºñ¹Ğ¹øÈ£
-							Ã£±â</a>
+						<a href="#" class="link">ì•„ì´ë”” ì°¾ê¸°</a> <a href="#" class="link">ë¹„ë°€ë²ˆí˜¸
+							ì°¾ê¸°</a>
 					</div>
 				</div>
 			</div>
 			<p class="err_msg">${requestScope.err_msg }</p>
-			<button class="login_btn blue_btn full_btn">·Î±×ÀÎ</button>
-			<button class="signup_btn white_btn full_btn">È¸¿ø°¡ÀÔ</button>
+			<button class="login_btn blue_btn full_btn">ë¡œê·¸ì¸</button>
+			<button class="signup_btn white_btn full_btn">íšŒì›ê°€ì…</button>
 		</form>
 	</section>
 </body>
@@ -53,10 +53,10 @@ const signup_btn = document.querySelector('.signup_btn');
 login_btn.addEventListener('click', (e) => {
   e.preventDefault();
   if (id.value.trim().length == 0) {
-    err_msg.innerHTML = '¾ÆÀÌµğ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä';
+    err_msg.innerHTML = 'ì•„ì´ë””ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”';
     return;
   } else if (pw.value.trim().length == 0) {
-    err_msg.innerHTML = 'ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä';
+    err_msg.innerHTML = 'ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”';
     return;
   } else {
     account.submit();

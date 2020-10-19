@@ -123,8 +123,8 @@ var contextPath = "${pageContext.request.contextPath}"</script>
 			<div class="product_option_settingBox"
 				style="display: none; margin-left: -100px">
 				<div class="settingBox_top">
-					<span class="step1_txt">1단계 옵션 템플릿</span> > <span class="step1_txt">2단계
-						옵션 등록</span> > <span class="step1_txt">3단계 옵션 설정</span>
+					<span class="step1_txt">1단계 옵션 템플릿</span> <span class="step2_txt"></span>
+					<span class="step3_txt"></span>
 				</div>
 				<div class="settingBox_step1 settingBox_content">
 					<p style="margin: 10px;">원하는 템플릿을 선택하세요.</p>
@@ -219,7 +219,8 @@ var contextPath = "${pageContext.request.contextPath}"</script>
       if (settingBox_step3.querySelector('.option_table_deletion_point')) {
         settingBox_step3.querySelector('.option_table_deletion_point').remove();
       }
-
+	  const product_quantity_input = document.querySelector('.product_quantity_input ');
+	  product_quantity_input.disabled = false;
       settingBox_step2.style.display = "none";
       settingBox_step3.style.display = "none";
       settingBox_step1.style.display = null;
@@ -231,6 +232,9 @@ var contextPath = "${pageContext.request.contextPath}"</script>
 
     if (e.target.classList.contains('product_option_btn_t')) {
       product_option_settingBox.style.display = null;
+	  const product_quantity_input = document.querySelector('.product_quantity_input ');
+	  product_quantity_input.disabled = true;
+	  product_quantity_input.value = 0;
       e.target.closest('.product_option').querySelector('.option_management_btn').style.display = null;
     }
 
@@ -272,6 +276,7 @@ var contextPath = "${pageContext.request.contextPath}"</script>
     if (e.target.classList.contains('step1_to_step2')) {
       if (document.querySelector('[name=option_type]:checked')) {
         const option_type = document.querySelector('[name=option_type]:checked').value;
+        const step2_txt = document.querySelector('.step2_txt').innerHTML = ' > 2단계	옵션 등록';
         settingBox_step1.style.display = 'none';
         if (option_type == 'A') {
           const txt = document.createElement('div');
@@ -295,6 +300,7 @@ var contextPath = "${pageContext.request.contextPath}"</script>
     // step2에서 step1로 이동
     if (e.target.classList.contains('step2_to_step1')) {
       const del_point = settingBox_step2.querySelector('.option_table_deletion_point');
+      const step2_txt = document.querySelector('.step2_txt').innerHTML = '';
       del_point.remove();
       settingBox_step2.style.display = 'none';
       settingBox_step1.style.display = null;
@@ -304,6 +310,7 @@ var contextPath = "${pageContext.request.contextPath}"</script>
     if (e.target.classList.contains('step2_to_step3')) {
       const option_type = settingBox_step2.querySelector('[name=option_type]').value
       const txt = document.createElement('div');
+      const step3_txt = document.querySelector('.step3_txt').innerHTML = ' > 3단계 옵션 설정';
       txt.classList.add('option_table_deletion_point');
       let validity = true;
       let txt2 = '';
@@ -375,6 +382,8 @@ var contextPath = "${pageContext.request.contextPath}"</script>
       del_point2.remove();
       settingBox_step3.style.display = 'none';
       settingBox_step1.style.display = null;
+      const step2_txt = document.querySelector('.step2_txt').innerHTML = '';
+      const step3_txt = document.querySelector('.step3_txt').innerHTML = '';
     }
 
     // step3에서 step2로 이동
@@ -383,6 +392,7 @@ var contextPath = "${pageContext.request.contextPath}"</script>
       del_point.remove();
       settingBox_step3.style.display = 'none';
       settingBox_step2.style.display = null;
+      const step3_txt = document.querySelector('.step3_txt').innerHTML = '';
     }
 
     // 적용하기
@@ -531,8 +541,9 @@ var contextPath = "${pageContext.request.contextPath}"</script>
 		  var ajax = new XMLHttpRequest();		  
 			ajax.onreadystatechange = function(e) {
 				if (ajax.readyState === ajax.DONE) {
-					if (ajax.status === 200 || ajax.status === 201) {							
-					console.log(ajax.responseText)
+					if (ajax.status === 200 || ajax.status === 201) {
+					alert('상품이 등록되었습니다.');	
+					location.reload();
 				};
 			}}
 

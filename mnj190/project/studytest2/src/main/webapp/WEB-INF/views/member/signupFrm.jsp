@@ -16,6 +16,8 @@
 const contextPath = "${pageContext.request.contextPath}"</script>
 </head>
 <body>
+	<%@ include file="/WEB-INF/views/layout/logo.jsp"%>
+
 	<section class="account-login account-container">
 		<form action="${pageContext.request.contextPath}/signup"
 			class="account-form" method="post">

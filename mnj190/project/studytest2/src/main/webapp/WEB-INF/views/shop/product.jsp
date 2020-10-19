@@ -12,6 +12,8 @@
 	href="${pageContext.request.contextPath}/css/common.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/layout_common.css">
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/js/webtoolkit.base64.js"></script>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script type="text/javascript">
@@ -74,13 +76,26 @@
 			<h1 class="itme_title">${prod.prod_name }</h1>
 			<div class="itme_price_wrap">
 				<div class="sale">
-					70<span class="percent_mark">%</span>
+					<!-- 70<span class="percent_mark">%</span> -->
 				</div>
 				<div class="price_real">
 					<div class="price_innerwrap">
-						<del class="price_original">46,000원</del>
+						<!-- <del class="price_original">46,000원</del> -->
 						<span class="itme_price"><fmt:formatNumber
 								value="${prod.prod_price}" pattern="#,###,###,###" /></span>원
+					</div>
+					<div class="review_rating">
+						<span
+							class="fa fa-star rating <c:if test="${prod.rating >= 1}">checked</c:if>"></span>
+						<span
+							class="fa fa-star rating <c:if test="${prod.rating >= 2}">checked</c:if>"></span>
+						<span
+							class="fa fa-star rating <c:if test="${prod.rating >= 3}">checked</c:if>"></span>
+						<span
+							class="fa fa-star rating <c:if test="${prod.rating >= 4}">checked</c:if>"></span>
+						<span
+							class="fa fa-star rating <c:if test="${prod.rating >= 5}">checked</c:if>"></span><span>
+							(${prod.rating})</span> / <span>구매 : ${prod.cnt}</span>
 					</div>
 				</div>
 			</div>
@@ -176,6 +191,9 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 
 <script>
@@ -306,7 +324,9 @@
    	if(e.target.classList.contains('buy_btn')){
 		console.log('클릭됨');
 		
-    	const prod_num = document.querySelector('.prod_num').value;		
+    	const prod_num = document.querySelector('.prod_num').value;
+    	const prod_name = document.querySelector('.itme_title').innerHTML;
+    	const prod_thumb = document.querySelector('.thumb').querySelector('img').src;
 		const details = new Array();
 		let added_prod;
 		let quantity;
@@ -320,14 +340,16 @@
 				Order_detailsVO.prod_num = prod_num;
 				Order_detailsVO.details_quantity = elem.querySelector('.quantity').value;
 				Order_detailsVO.op_num = elem.querySelector('.op_num').value;
+				Order_detailsVO.op_name = elem.querySelector('.first_result').innerText.split('\n').join(" / ");
+				Order_detailsVO.op_price = elem.querySelector('.result_price').innerText
 				details.push(Order_detailsVO);
+
 				})
 			} else if(prod_option == 'f'){
 				quantity = document.querySelector('.quantity').value;
 			  }
 
-		const ajax = new XMLH
-		ttpRequest();
+		const ajax = new XMLHttpRequest();
     	
 		ajax.onreadystatechange = function(e) {
 			if (ajax.readyState === ajax.DONE) {
@@ -336,17 +358,16 @@
 					if(ajax.responseText == 'fail'){
 						window.open(contextPath+"/loginFrm?reqURI=seccess","_blank","height=500,width=500, status=yes,toolbar=no,menubar=no,location=no");
 
-								} else if (ajax.responseText == 'success'){
-							setTimeout(function() {
-								alert('주문이 완료되었습니다.');
-								location.reload();
-								}, 100);
+								} else if (ajax.responseText == 'success'){		
+								location.href = contextPath + '/shop/payment?data=' + dataObjectBase64;
 							}
 			}
 		}}
 
 		const result = JSON.stringify({
 			prod_num : prod_num,
+			prod_name : prod_name,
+			prod_thumb : prod_thumb,
 			seller : ucode.value,
 			orders_payment : total_price_value.value,
 			orders_quantity : quantity,
@@ -354,11 +375,12 @@
 			order_details : details
 			});
 
+	    var dataObjectBase64 = Base64.encode(result);
+
 		console.log(result);
 
-	    ajax.open("POST", contextPath + "/shop/order", false);
-		ajax.setRequestHeader("Content-Type", "application/json;charset=utf-8");	
-	    ajax.send(result);
+	    ajax.open("POST", contextPath + "/shop/login_ck", false);
+	    ajax.send();
    	   	}   	   	
   })
   
@@ -487,7 +509,7 @@ li {
 
 .item_top_info {
 	width: 450px;
-	margin-top: 10px;
+	margin-top: 50px;
 }
 
 .item_top_info .itme_price_wrap {
@@ -514,7 +536,7 @@ li {
 	font-size: 30px;
 	color: #000;
 	font-weight: bold;
-	/* display: block; */
+	margin-left: -10px;
 }
 
 .item_top_info .itme_price_wrap .price_innerwrap .price_original {
@@ -696,6 +718,10 @@ li {
 	background-color: #1f8ce6;
 	border: 1px #1f8ce6 solid;
 	box-sizing: border-box;
+}
+
+.rating.checked {
+	color: orange;
 }
 </style>
 </html>

@@ -40,6 +40,7 @@ public class SellerController {
 
 	@GetMapping(value = "registrationFrm")
 	public String getRegistrationFrm(Model model) {
+		model.addAttribute("request", "registrationFrm");
 		model.addAttribute("category", shopSVC.getCategory());
 
 		return "/seller/seller_home";

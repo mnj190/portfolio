@@ -30,6 +30,9 @@ public interface ShopSVC {
 //	상품 목록
 	public List<ProductVO> getProductList(String cate, String page, String getStr_num, String getEnd_num);
 
+//	메인 페이지 상품 가져오기
+	public List<ProductVO> getProductList(String type);
+	
 //  상품 가져오기
 	public ProductVO getProduct(String num);
 

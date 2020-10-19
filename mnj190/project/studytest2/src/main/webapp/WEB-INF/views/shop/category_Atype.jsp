@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <style>
 li {
 	list-style: none;
@@ -152,6 +154,19 @@ a {
 .category_item_area .category_type_btn.selected:hover {
 	color: #1f8ce6;
 }
+
+.review_rating {
+	box-sizing: border-box;
+	margin-top: 80px
+}
+
+.review_rating span.rating[data] {
+	font-size: 20px;
+}
+
+.rating.checked {
+	color: orange;
+}
 </style>
 </head>
 <body>
@@ -184,10 +199,24 @@ a {
 									<div class="item_info">
 										<spna class="item_title"> <a
 											href="${pageContext.request.contextPath}/shop/product?num=${prod.prod_num}">${prod.prod_name}</a></spna>
-										<strong class="sale"> 69% </strong> <span class="price">
-											<strong><fmt:formatNumber value="${prod.prod_price}"
-													pattern="#,###,###,###" /></strong><span>원</span> <del>20,000원</del>
+										<!-- <strong class="sale"> 69% </strong> -->
+										<span class="price"> <strong><fmt:formatNumber
+													value="${prod.prod_price}" pattern="#,###,###,###" /></strong><span>원</span>
+											<!-- <del>20,000원</del> -->
 										</span>
+										<div class="review_rating">
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 1}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 2}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 3}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 4}">checked</c:if>"></span>
+											<span
+												class="fa fa-star rating <c:if test="${prod.rating >= 5}">checked</c:if>"></span><span>
+												(${prod.rating})</span> / <span>구매 : ${prod.cnt}</span>
+										</div>
 									</div>
 								</div>
 							</li>

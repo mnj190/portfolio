@@ -76,6 +76,16 @@ public class ShopSVCImpl implements ShopSVC {
 		return shopDAO.getProducts(map);
 	}
 
+//	최신 상품
+	public List<ProductVO> getProductList(String type) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("str_num", "1");
+		map.put("end_num", "9");
+
+		return shopDAO.getProducts(map);
+	}
+
 //  상품 가져오기
 	@Override
 	public ProductVO getProduct(String num) {

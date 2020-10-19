@@ -188,7 +188,7 @@ header .attach_menu .menu_list a {
 			<div class="left_area">
 				<div class="logo">
 					<a href="${pageContext.request.contextPath}" class="logo_title">
-						제목 </a>
+						개인 포트폴리오 </a>
 				</div>
 			</div>
 			<div class="rigth_area">
@@ -235,10 +235,10 @@ header .attach_menu .menu_list a {
 				<li><label for="" class="total_category_btn"><a
 						href="#"><i class="fas fa-caret-down font_menu_btn"></i> 전체
 							카테고리</a></label></li>
-				<li><a href="">메뉴1</a></li>
-				<li><a href="">메뉴2</a></li>
-				<li><a href="">메뉴3</a></li>
-				<li><a href="">메뉴4</a></li>
+				<li><a href="">이벤트 메뉴</a></li>
+				<li><a href="">이벤트 메뉴</a></li>
+				<li><a href="">이벤트 메뉴</a></li>
+				<li><a href="">이벤트 메뉴</a></li>
 			</ul>
 			<div class="attach_total_category not_t2" style="display: none;">
 				<ul class="total_category_list not_t2">

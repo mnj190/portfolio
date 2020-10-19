@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <title>Home</title>
@@ -20,6 +21,8 @@
 	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
 	crossorigin="anonymous">
 <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet"
 	href="${pageContext.request.contextPath}/css/common.css">
 <script type="text/javascript">
 	var contextPath = "${pageContext.request.contextPath}"
@@ -34,5 +37,8 @@
 	<main>
 		<%@ include file="/WEB-INF/views/layout/main.jsp"%>
 	</main>
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 </html>

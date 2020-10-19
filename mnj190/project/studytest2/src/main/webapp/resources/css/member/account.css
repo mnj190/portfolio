@@ -1,171 +1,175 @@
 @charset "EUC-KR";
+
 .account-form .input-group {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .account-form .input-group>.account-label:first-child>.login_input {
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
 }
 
 .account-form .input-group>.input-wrapper:first-child>.signup_input {
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	border-top-left-radius: 4px;
 }
 
-.account-form .input-group>.input-wrapper:nth-last-child(2)>.signup_input {
-  border-bottom-right-radius: 4px;
-  border-bottom-left-radius: 4px;
+.account-form .input-group>.input-wrapper:nth-last-child(2)>.signup_input
+	{
+	border-bottom-right-radius: 4px;
+	border-bottom-left-radius: 4px;
 }
 
 .account-form .login_input {
-  font-family: Helvetica Neue, Apple SD Gothic Neo, arial, ³ª´®°íµñ, Nanum Gothic, µ¸¿ò, Dotum, Tahoma, Geneva, sans-serif;
-  letter-spacing: -.03em;
-  line-height: 1em;
-  box-sizing: border-box;
-  height: 50px;
-  padding: 14px 18px;
-  overflow: hidden;
-  border: 1px solid #d6deeb;
-  border-style: solid;
-  border-radius: 0;
-  background: #fff;
-  color: #738096;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: normal;
-  box-shadow: none;
-  appearance: none;
+	font-family: Helvetica Neue, Apple SD Gothic Neo, arial, ³ª´®°íµñ,
+		Nanum Gothic, µ¸¿ò, Dotum, Tahoma, Geneva, sans-serif;
+	letter-spacing: -.03em;
+	line-height: 1em;
+	box-sizing: border-box;
+	height: 50px;
+	padding: 14px 18px;
+	overflow: hidden;
+	border: 1px solid #d6deeb;
+	border-style: solid;
+	border-radius: 0;
+	background: #fff;
+	color: #738096;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: normal;
+	box-shadow: none;
+	appearance: none;
 }
 
-.account-form .signup_input{
-  font-family: Helvetica Neue,Apple SD Gothic Neo,arial,³ª´®°íµñ,Nanum Gothic,µ¸¿ò,Dotum,Tahoma,Geneva,sans-serif;
-  font-size: 12px;
-  letter-spacing: -.03em;
-  line-height: 1em;
-  box-sizing: border-box;
-  display: block;
-  position: relative;
-  width: 100%;
-  height: 48px;
-  padding: 21px 10px 7px;
-  overflow: hidden;
-  border: 1px solid #d6deeb;
-  border-style: solid;
-  border-radius: 0;
-  background: #fff;
-  color: #738096;
-  font-size: 15px;
-  font-weight: 700;
-  line-height: 0;
-  box-shadow: none;
-  appearance: none;
+.account-form .signup_input {
+	font-family: Helvetica Neue, Apple SD Gothic Neo, arial, ³ª´®°íµñ,
+		Nanum Gothic, µ¸¿ò, Dotum, Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	letter-spacing: -.03em;
+	line-height: 1em;
+	box-sizing: border-box;
+	display: block;
+	position: relative;
+	width: 100%;
+	height: 48px;
+	padding: 21px 10px 7px;
+	overflow: hidden;
+	border: 1px solid #d6deeb;
+	border-style: solid;
+	border-radius: 0;
+	background: #fff;
+	color: #738096;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 0;
+	box-shadow: none;
+	appearance: none;
 }
 
 .account-form .login_input:hover, .account-form .signup_input:hover {
-  border: #999 1px solid;
-  z-index: 1;
-  box-shadow: 1px 1px 2px #ccc inset ;
+	border: #999 1px solid;
+	z-index: 1;
+	box-shadow: 1px 1px 2px #ccc inset;
 }
 
 .account-form .login_input:focus, .account-form .signup_input:focus {
-  border:  #1f8ce6 1px solid;
-  z-index: 2  ;
+	border: #1f8ce6 1px solid;
+	z-index: 2;
 }
 
-.account-form .login_input,
-.account-form .account-label {
-  display: block;
-  position: relative;
-  width: 100%;
+.account-form .login_input, .account-form .account-label {
+	display: block;
+	position: relative;
+	width: 100%;
 }
 
 .account-container {
-  width: 360px;
-  margin: 0 auto;
-  padding: 60px 0 70px;
+	width: 360px;
+	margin: 0 auto;
+	padding: 0 0 70px;
 }
 
 .account-container .login_menu_wrapper {
-  display: flex;
-  justify-content: space-between;
-  margin-top: -1px;
-  padding: 13px 8px 13px 16px;
-  overflow: hidden;
-  border: 1px solid #d6deeb;
-  border-radius: 0 0 4px 4px;
-  background: #f7fbff;
-  z-index: 1;
-  font-size: 12px;
-  color: #738096;
+	display: flex;
+	justify-content: space-between;
+	margin-top: -1px;
+	padding: 13px 8px 13px 16px;
+	overflow: hidden;
+	border: 1px solid #d6deeb;
+	border-radius: 0 0 4px 4px;
+	background: #f7fbff;
+	z-index: 1;
+	font-size: 12px;
+	color: #738096;
 }
 
 .account-container .login_menu_wrapper .auto_login_check .auto_login {
-  margin: 2px;
+	margin: 2px;
 }
 
 .account-container .login_menu_wrapper .external_links .link {
-  display: block;
-  padding: 0 6px;
-  float: left;
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: #738096;
-  font-size: 12px;
-  letter-spacing: -.03em;
-  appearance: none;
+	display: block;
+	padding: 0 6px;
+	float: left;
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: #738096;
+	font-size: 12px;
+	letter-spacing: -.03em;
+	appearance: none;
 }
 
 .account-container .login_menu_wrapper .external_links .link+.link {
-  border-left: 1px solid #dfdfdf;
+	border-left: 1px solid #dfdfdf;
 }
 
-.signup_btn,
-.login_btn {
-  margin-top: 10px;
+.signup_btn, .login_btn {
+	margin-top: 10px;
 }
 
 .input-wrapper {
-  display: block;
-  position: relative;
-  width: 100%;
-  margin-bottom: -1px;
+	display: block;
+	position: relative;
+	width: 100%;
+	margin-bottom: -1px;
 }
 
 .input-wrapper .placeholder {
-  position: absolute;
+	position: absolute;
 }
 
 .input-wrapper .placeholder {
-  color: #999;
-  font-family: Helvetica Neue,Apple SD Gothic Neo,arial,³ª´®°íµñ,Nanum Gothic,µ¸¿ò,Dotum,Tahoma,Geneva,sans-serif;
-  font-size: 12px;
-  letter-spacing: -.03em;
-  line-height: 1em;
-  top: 18px;
-  left: 10px;
-  color: #738097;
-  font-size: 15px;
-  cursor: text;
-  cursor: auto;
-  pointer-events: none;
-  transition: transform .2s ease,font .2s ease;
-  will-change: transform font;
-  user-select: none;
-  z-index: 3;
+	color: #999;
+	font-family: Helvetica Neue, Apple SD Gothic Neo, arial, ³ª´®°íµñ,
+		Nanum Gothic, µ¸¿ò, Dotum, Tahoma, Geneva, sans-serif;
+	font-size: 12px;
+	letter-spacing: -.03em;
+	line-height: 1em;
+	top: 18px;
+	left: 10px;
+	color: #738097;
+	font-size: 15px;
+	cursor: text;
+	cursor: auto;
+	pointer-events: none;
+	transition: transform .2s ease, font .2s ease;
+	will-change: transform font;
+	user-select: none;
+	z-index: 3;
 }
 
-.err_msg{
-  color: red;
-  font-size: 12px;
-  margin: 0 0 0 5px;
+.err_msg {
+	color: red;
+	font-size: 12px;
+	margin: 0 0 0 5px;
 }
 
-.account-form .signup_btn, .account-form .signup_submit_btn, .account-form .login_btn {
-  margin-top: 10px;
+.account-form .signup_btn, .account-form .signup_submit_btn,
+	.account-form .login_btn {
+	margin-top: 10px;
 }
 
 .account-form .account-label {
-  margin-bottom: -1px;
+	margin-bottom: -1px;
 }

@@ -23,4 +23,7 @@ public class OrdersVO {
 	private String seller_id;
 	private String prod_name;
 	private String prod_thumb0;
+	/*
+	 * private String op_name; private String op_price;
+	 */
 }

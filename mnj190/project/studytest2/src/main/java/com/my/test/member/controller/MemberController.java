@@ -83,7 +83,7 @@ public class MemberController {
 	@RequestMapping(value = "/signupFrm")
 	public String signupFrm() {
 
-		return "member/signupFrm";
+		return "/member/signupFrm";
 	}
 
 	@ResponseBody
@@ -101,7 +101,7 @@ public class MemberController {
 		logger.info(memberVO.toString());
 		memberSVC.signup(memberVO);
 
-		return "member/signupFrm";
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/logout")

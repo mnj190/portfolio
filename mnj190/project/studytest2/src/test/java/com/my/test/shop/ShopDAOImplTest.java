@@ -52,21 +52,20 @@ public class ShopDAOImplTest {
 	}
 
 	@Test
-	@DisplayName("총 상품 수")
-	@Disabled
+	@DisplayName("상품 목록 가져오기")
+//	@Disabled
 	void getProducts() {
 		Map<String, String> map = new HashMap<String, String>();
-		map.put("cate", "8");
 		map.put("str_num", "1");
-		map.put("end_num", "2");
+		map.put("end_num", "9");
 		logger.info("실행됨");
 		List<ProductVO> xxx = shopDAO.getProducts(map);
-		logger.info(xxx.get(0).getProd_name());
+		logger.info(xxx.toString());
 	}
 
 	@Test
 	@DisplayName("상품 가져오기")
-//	@Disabled
+	@Disabled
 	void getProduct() {
 		String num = "109";
 		logger.info("실행됨");

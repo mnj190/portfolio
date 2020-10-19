@@ -42,5 +42,8 @@ main {
 		<!-- paging -->
 		<%@ include file="/WEB-INF/views/shop/category_paging.jsp"%>
 	</main>
+
+	<!-- footer -->
+	<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 </html>

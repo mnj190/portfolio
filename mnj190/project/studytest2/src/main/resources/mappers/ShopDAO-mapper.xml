@@ -57,23 +57,63 @@
 
 	<select id="getProducts" parameterType="map"
 		resultType="com.my.test.shop.vo.ProductVO">
-		select prod_num, prod_name, prod_price,
-		prod_thumb0,
-		prod_purchases from(
-		select prod_num, prod_name, prod_price,
-		prod_thumb0,
-		prod_purchases, row_number()
-		over(order by PROD_NUM desc)
-		as num from
-		PRODUCT where prod_dep2= #{cate}
+		select * from(
+		select t1.*, t2.cnt, t2.rating, row_number() over(order
+		by
+		<if test='type == "hot_item"'>t2.cnt desc NULLS LAST, </if>
+		<if test='type == "best_review"'>t2.rating desc NULLS LAST, </if>
+		t1.PROD_NUM desc
 		)
-		where num BETWEEN
-		#{str_num} and #{end_num}
+		as num from product t1 , (select t1.prod_num as
+		prod_num, cnt, rating
+		from (select prod_num, count(*) as cnt
+		from(select t1.prod_num from
+		product t1, orders t2 where t1.prod_num =
+		t2.prod_num) group by
+		prod_num) t1,
+		(select prod_num, avg(review_rating)
+		as rating from
+		(select t1.prod_num,
+		t2.review_rating from product t1,
+		REVIEW t2 where
+		t1.prod_num =
+		t2.prod_num(+)) group by prod_num)t2
+		where
+		t1.prod_num =
+		t2.prod_num(+)) t2
+		where t1.prod_num =
+		t2.prod_num(+)
+		<if test='cate != null'>
+			and
+			PROD_DEP2 = #{cate}
+		</if>
+		) where num BETWEEN
+		#{str_num}
+		and
+		#{end_num}
 	</select>
 
 	<select id="getProduct" parameterType="String"
 		resultType="com.my.test.shop.vo.ProductVO">
-		select * from product where prod_num = #{num}
+		select * from product t1 , (select t1.prod_num as prod_num,
+		cnt, rating from
+		(select prod_num, count(*) as cnt from(select
+		t1.prod_num from product
+		t1, orders t2 where t1.prod_num =
+		t2.prod_num(+))
+		group by prod_num) t1,
+		(select prod_num,
+		avg(review_rating) as rating
+		from (select
+		t1.prod_num, t2.review_rating
+		from product t1, REVIEW t2
+		where
+		t1.prod_num = t2.prod_num(+)) group by
+		prod_num)t2 where t1.prod_num
+		=
+		t2.prod_num(+)) t2
+		where t1.prod_num =
+		t2.prod_num(+) and t1.prod_num=#{num}
 	</select>
 
 	<select id="getOp_names" parameterType="String"

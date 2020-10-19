@@ -23,4 +23,8 @@ public class ProductVO {
 	private String prod_thumb2 = null;
 	private String prod_purchases;
 	List<OptionVO> optionVO;
+	
+	private int cnt;
+	private int rating;
+	private String num;
 }
